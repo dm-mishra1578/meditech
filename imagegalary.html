@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Zoom & Pixel Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.upload-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+    background-color: #2980b9;
+}
+
+#fileName {
+    color: #7f8c8d;
+}
+
+.zoom-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.zoom-controls button {
+    padding: 8px 15px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.zoom-controls button:hover {
+    background-color: #27ae60;
+}
+
+#resetZoom {
+    background-color: #e74c3c;
+}
+
+#resetZoom:hover {
+    background-color: #c0392b;
+}
+
+#zoomLevel {
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.image-container {
+    display: flex;
+    gap: 30px;
+}
+
+.main-image-wrapper {
+    flex: 3;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#displayImage {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    transition: transform 0.2s;
+}
+
+#pixelViewer {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #3498db;
+    border-radius: 50%;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 10;
+}
+
+.pixel-details {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.pixel-details h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+#pixelInfo {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.pixel-color-box {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        flex-direction: column;
+    }
+    
+    .main-image-wrapper {
+        min-height: 300px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Zoom & Pixel Viewer</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="imageUpload" accept="image/*">
+            <label for="imageUpload" class="upload-btn">Choose Image</label>
+            <span id="fileName"></span>
+        </div>
+        
+        <div class="zoom-controls">
+            <button id="zoomIn">Zoom In (+)</button>
+            <button id="zoomOut">Zoom Out (-)</button>
+            <span id="zoomLevel">100%</span>
+            <button id="resetZoom">Reset</button>
+        </div>
+        
+        <div class="image-container">
+            <div class="main-image-wrapper">
+                <img id="displayImage" alt="Uploaded Image">
+                <div id="pixelViewer"></div>
+            </div>
+            
+            <div class="pixel-details">
+                <h3>Pixel Details</h3>
+                <div id="pixelInfo">
+                    <p>Hover over the image to see pixel details</p>
+                </div>
+                <div class="pixel-color-box"></div>
+            </div>
+        </div>
+    </div>
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const imageUpload = document.getElementById('imageUpload');
+    const displayImage = document.getElementById('displayImage');
+    const fileName = document.getElementById('fileName');
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const resetZoomBtn = document.getElementById('resetZoom');
+    const zoomLevel = document.getElementById('zoomLevel');
+    const pixelViewer = document.getElementById('pixelViewer');
+    const pixelInfo = document.getElementById('pixelInfo');
+    const pixelColorBox = document.querySelector('.pixel-color-box');
+    
+    let currentZoom = 1;
+    let imageLoaded = false;
+    
+    // Handle image upload
+    imageUpload.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            fileName.textContent = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                displayImage.src = event.target.result;
+                displayImage.onload = function() {
+                    imageLoaded = true;
+                    resetZoom();
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Zoom functionality
+    zoomInBtn.addEventListener('click', function() {
+        if (imageLoaded) {
+            currentZoom += 0.1;
+            updateZoom();
+        }
+    });
+    
+    zoomOutBtn.addEventListener('click', function() {
+        if (imageLoaded && currentZoom > 0.2) {
+            currentZoom -= 0.1;
+            updateZoom();
+        }
+    });
+    
+    resetZoomBtn.addEventListener('click', function() {
+        if (imageLoaded) {
+            resetZoom();
+        }
+    });
+    
+    function updateZoom() {
+        displayImage.style.transform = `scale(${currentZoom})`;
+        zoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+    
+    function resetZoom() {
+        currentZoom = 1;
+        updateZoom();
+    }
+    
+    // Pixel viewer functionality
+    displayImage.addEventListener('mousemove', function(e) {
+        if (!imageLoaded) return;
+        
+        const rect = displayImage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Calculate position relative to original image (accounting for zoom)
+        const imgX = (x / currentZoom) - ((rect.width * (currentZoom - 1)) / (2 * currentZoom));
+        const imgY = (y / currentZoom) - ((rect.height * (currentZoom - 1)) / (2 * currentZoom));
+        
+        // Only show if mouse is over the image
+        if (imgX >= 0 && imgY >= 0 && imgX <= displayImage.naturalWidth && imgY <= displayImage.naturalHeight) {
+            // Position the pixel viewer
+            pixelViewer.style.left = `${x}px`;
+            pixelViewer.style.top = `${y}px`;
+            pixelViewer.style.display = 'block';
+            
+            // Create magnified view
+            const zoomFactor = 5;
+            const viewerSize = 100;
+            const sampleSize = viewerSize / zoomFactor;
+            
+            pixelViewer.style.backgroundImage = `url(${displayImage.src})`;
+            pixelViewer.style.backgroundSize = `${displayImage.naturalWidth * currentZoom * zoomFactor}px ${displayImage.naturalHeight * currentZoom * zoomFactor}px`;
+            pixelViewer.style.backgroundPosition = `-${imgX * currentZoom * zoomFactor - viewerSize/2}px -${imgY * currentZoom * zoomFactor - viewerSize/2}px`;
+            
+            // Get pixel color
+            getPixelColor(displayImage, imgX, imgY);
+        } else {
+            pixelViewer.style.display = 'none';
+        }
+    });
+    
+    displayImage.addEventListener('mouseleave', function() {
+        pixelViewer.style.display = 'none';
+        pixelInfo.innerHTML = '<p>Hover over the image to see pixel details</p>';
+        pixelColorBox.style.backgroundColor = 'transparent';
+    });
+    
+    function getPixelColor(img, x, y) {
+        // Create a canvas to get pixel data
+        const canvas = document.createElement('canvas');
+        canvas.width = 1;
+        canvas.height = 1;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw the image on canvas
+        ctx.drawImage(img, -x, -y);
+        
+        // Get the pixel data
+        const pixel = ctx.getImageData(0, 0, 1, 1).data;
+        
+        // Display the information
+        const r = pixel[0];
+        const g = pixel[1];
+        const b = pixel[2];
+        const a = pixel[3] / 255;
+        const hex = rgbToHex(r, g, b);
+        
+        pixelInfo.innerHTML = `
+            <p><strong>Position:</strong> X: ${Math.round(x)}, Y: ${Math.round(y)}</p>
+            <p><strong>RGB:</strong> ${r}, ${g}, ${b}</p>
+            <p><strong>HEX:</strong> ${hex}</p>
+            <p><strong>Alpha:</strong> ${a.toFixed(2)}</p>
+        `;
+        
+        pixelColorBox.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+    
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
+});
+    </script>
+</body>
+</html>

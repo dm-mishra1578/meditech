@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Gubli Converter</title>
+    <link rel="stylesheet" href="css/stylesgb.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image to Gubli Converter</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="imageUpload" accept="image/*">
+            <label for="imageUpload" class="upload-btn">Choose Image</label>
+            <span id="fileName"></span>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="styleIntensity">Style Intensity</label>
+                <input type="range" id="styleIntensity" min="1" max="10" value="5">
+                <span id="intensityValue">5</span>
+            </div>
+            
+            <div class="control-group">
+                <label for="colorPalette">Color Palette</label>
+                <select id="colorPalette">
+                    <option value="vibrant">Vibrant</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="monochrome">Monochrome</option>
+                    <option value="highContrast">High Contrast</option>
+                </select>
+            </div>
+            
+            <button id="convertBtn" class="btn">Convert to Gubli</button>
+        </div>
+        
+        <div class="image-container">
+            <div class="original-image">
+                <h3>Original Image</h3>
+                <canvas id="originalCanvas"></canvas>
+            </div>
+            <div class="converted-image">
+                <h3>Gubli Version</h3>
+                <canvas id="convertedCanvas"></canvas>
+                <button id="downloadBtn" class="btn" disabled>Download Gubli</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scriptgb.js"></script>
+</body>
+</html>

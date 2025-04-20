@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devanand | Web Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Accessibility Controls -->
+    <div class="accessibility-bar">
+        <div class="font-controls">
+            <button id="fontDecrease" title="Decrease font size">A-</button>
+            <button id="fontReset" title="Reset font size">A</button>
+            <button id="fontIncrease" title="Increase font size">A+</button>
+        </div>
+        <div class="theme-toggle">
+            <button id="themeToggle" title="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Devanand</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="hero_title">Hi, I'm <span>Devanand</span></h1>
+            <h2 class="hero-subtitle" data-i18n="hero_subtitle">Web Developer & 3rd Year Engineering Student</h2>
+            <p class="hero-description" data-i18n="hero_description">Creating immersive digital experiences with cutting-edge web technologies.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary" data-i18n="view_projects">View Projects</a>
+                <a href="#contact" class="btn btn-secondary" data-i18n="contact_me">Contact Me</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-cube">
+                <div class="cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <div class="floating-icons">
+                <i class="fab fa-html5"></i>
+                <i class="fab fa-css3-alt"></i>
+                <i class="fab fa-js"></i>
+                <i class="fab fa-react"></i>
+                <i class="fab fa-node-js"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title" data-i18n="about_title">About <span>Me</span></h2>
+        <div class="about-container">
+            <div class="about-image">
+                <div class="profile-card">
+                    <div class="profile-card-inner">
+                        <div class="profile-card-front">
+                            <img src="C:\Users\devan\Pictures\WhatsApp Image 2024-11-19 at 21.08.57_4e7bdc31.jpg" alt="Devanand" class="profile-img">
+                        </div>
+                        <div class="profile-card-back">
+                            <h3 data-i18n="education">Education</h3>
+                            <p data-i18n="education_details">3rd Year Engineering Student<br>Computer Science</p>
+                            <h3 data-i18n="experience">Experience</h3>
+                            <p data-i18n="experience_details">2+ years in Web Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h3 data-i18n="who_am_i">Who am I?</h3>
+                <p data-i18n="about_para1">I'm Devanand, a passionate web developer currently pursuing my Engineering degree in Computer Science. With over 2 years of experience in web development, I specialize in creating responsive, user-friendly websites with modern technologies.</p>
+                <p data-i18n="about_para2">My journey in coding began when I was in school, and since then, I've been constantly learning and implementing new technologies to build innovative solutions.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="20">0</div>
+                        <div class="stat-text" data-i18n="projects_completed">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-text" data-i18n="happy_clients">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-text" data-i18n="awards">Awards</div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary" data-i18n="download_cv">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <h2 class="section-title" data-i18n="skills_title">My <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-wheel">
+                <div class="wheel">
+                    <div class="wheel-center"></div>
+                    <div class="wheel-item" data-skill="HTML5">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="wheel-item" data-skill="CSS3">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="wheel-item" data-skill="JavaScript">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="wheel-item" data-skill="React">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="wheel-item" data-skill="Node.js">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <div class="wheel-item" data-skill="Python">
+                        <i class="fab fa-python"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-details">
+                <h3 data-i18n="my_tech_stack">My Tech Stack</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span data-i18n="html5">HTML5</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="progress html" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span data-i18n="css3">CSS3</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="progress css" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span data-i18n="javascript">JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="progress js" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span data-i18n="react">React</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="progress react" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span data-i18n="node_js">Node.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="progress node" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title" data-i18n="projects_title">My <span>Projects</span></h2>
+        <div class="projects-container">
+            <div class="project-gallery">
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 1">
+                            <h3 data-i18n="project1_title">E-Commerce Website</h3>
+                        </div>
+                        <div class="project-card-back">
+                            <h3 data-i18n="project1_title">E-Commerce Website</h3>
+                            <p data-i18n="project1_desc">A full-featured online store with shopping cart, user authentication, and payment processing.</p>
+                            <div class="project-tech">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <a href="#" class="btn btn-small" data-i18n="view_project">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 2">
+                            <h3 data-i18n="project2_title">Task Management App</h3>
+                        </div>
+                        <div class="project-card-back">
+                            <h3 data-i18n="project2_title">Task Management App</h3>
+                            <p data-i18n="project2_desc">A productivity application for managing tasks with drag-and-drop functionality and team collaboration.</p>
+                            <div class="project-tech">
+                                <span>Vue.js</span>
+                                <span>Firebase</span>
+                            </div>
+                            <a href="#" class="btn btn-small" data-i18n="view_project">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card-inner">
+                        <div class="project-card-front">
+                            <img src="https://via.placeholder.com/400x300" alt="Project 3">
+                            <h3 data-i18n="project3_title">Portfolio Website</h3>
+                        </div>
+                        <div class="project-card-back">
+                            <h3 data-i18n="project3_title">Portfolio Website</h3>
+                            <p data-i18n="project3_desc">A responsive portfolio website with 3D animations and interactive elements.</p>
+                            <div class="project-tech">
+                                <span>Three.js</span>
+                                <span>GSAP</span>
+                            </div>
+                            <a href="#" class="btn btn-small" data-i18n="view_project">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary view-more" data-i18n="view_all_projects">View All Projects</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title" data-i18n="contact_title">Get In <span>Touch</span></h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-info-content">
+                        <h3 data-i18n="email">Email</h3>
+                        <p>devanand@example.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-info-content">
+                        <h3 data-i18n="phone">Phone</h3>
+                        <p>+91 9876543210</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-info-content">
+                        <h3 data-i18n="location">Location</h3>
+                        <p data-i18n="location_details">Mumbai, India</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder=" " required>
+                    <label data-i18n="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder=" " required>
+                    <label data-i18n="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder=" " required>
+                    <label data-i18n="subject">Subject</label>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder=" " required></textarea>
+                    <label data-i18n="message">Your Message</label>
+                </div>
+                <button type="submit" class="btn btn-primary" data-i18n="send_message">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Devanand</div>
+            <div class="footer-links">
+                <a href="#home" data-i18n="home">Home</a>
+                <a href="#about" data-i18n="about">About</a>
+                <a href="#skills" data-i18n="skills">Skills</a>
+                <a href="#projects" data-i18n="projects">Projects</a>
+                <a href="#contact" data-i18n="contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="copyright">&copy; 2023 Devanand. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
