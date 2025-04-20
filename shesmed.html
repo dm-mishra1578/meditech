@@ -1,0 +1,1561 @@
+<!--  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTech Solutions - Advanced Medical Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2a7fba;
+            --primary-dark: #1a5f8b;
+            --secondary: #4ac7e9;
+            --white: #ffffff;
+            --black: #222222;
+            --gray: #f5f5f5;
+            --dark-gray: #777777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Accessibility Controls */
+        .accessibility-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .font-size-controls {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .font-size-controls button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .font-size-controls button:hover {
+            background: rgba(42, 127, 186, 0.1);
+        }
+
+        #font-decrease {
+            font-size: 0.9rem;
+        }
+
+        #font-reset {
+            font-weight: bold;
+        }
+
+        #font-increase {
+            font-size: 1.1rem;
+        }
+
+        #theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            background: rgba(42, 127, 186, 0.1);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --white: #121212;
+            --black: #f5f5f5;
+            --gray: #222222;
+            --dark-gray: #aaaaaa;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        body.dark-mode .navbar {
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .service-card,
+        body.dark-mode .product-card,
+        body.dark-mode .contact-form input,
+        body.dark-mode .contact-form textarea,
+        body.dark-mode footer {
+            background-color: #1e1e1e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #f5f5f5;
+        }
+
+        body.dark-mode .footer-bottom {
+            border-top-color: #444;
+        }
+
+        /* Font size classes */
+        .font-small {
+            font-size: 0.9rem;
+        }
+
+        .font-normal {
+            font-size: 1rem;
+        }
+
+        .font-large {
+            font-size: 1.1rem;
+        }
+
+        .font-xlarge {
+            font-size: 1.2rem;
+        }
+
+        /* Adjust specific elements for larger font sizes */
+        .font-xlarge .section-header h2 {
+            font-size: 2.8rem;
+        }
+
+        .font-xlarge .slide-content h1 {
+            font-size: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .accessibility-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .font-size-controls button {
+                padding: 6px 10px;
+            }
+
+            #theme-toggle {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .scalene {
+            width: 80px;
+            height: 80px;
+            border: 8px solid var(--gray);
+            border-top: 8px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle,
+        .nav-close {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+
+        /* Hero Slider */
+        .hero {
+            height: 100vh;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .hero-slider {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        .slide-content h1 {
+            font-size: 3.5rem;
+            color: var(--black);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+        }
+
+        .slide-model {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: var(--white);
+            opacity: 0.7;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary);
+            opacity: 1;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 1.5rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin-bottom: 0;
+        }
+
+        .about-model {
+            flex: 1;
+            height: 500px;
+            background-color: var(--gray);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(42, 127, 186, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .service-model {
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
+            background-color: var(--gray);
+            border-radius: 10px;
+        }
+
+        /* Products Section */
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-model {
+            width: 100%;
+            height: 250px;
+            background-color: var(--gray);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-specs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .product-specs span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .product-specs i {
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .info-item i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .info-item p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(42, 127, 186, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 127, 186, 0.2);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f9f9f9;
+            padding: 80px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            color: var(--black);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col p {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul li a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 50px 0 0 50px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            width: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        /* 3D Model Container Styles */
+        .model-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-model {
+                width: 100%;
+            }
+
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 350px;
+                height: 100vh;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-toggle,
+            .nav-close {
+                display: block;
+            }
+
+            .nav-close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            .slide-content {
+                left: 5%;
+                max-width: 90%;
+            }
+
+            .slide-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .slide-model {
+                width: 100%;
+                opacity: 0.3;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="scalene"></div>
+            <p>Loading MediTech Solutions...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="accessibility-controls">
+        <div class="font-size-controls">
+            <button id="font-decrease" title="Decrease Font Size">A-</button>
+            <button id="font-reset" title="Reset Font Size">A</button>
+            <button id="font-increase" title="Increase Font Size">A+</button>
+        </div>
+        <button id="theme-toggle" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Medi<span>Tech</span></a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+                <div class="nav-close"><i class="fas fa-times"></i></div>
+            </div>
+            <div class="nav-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="swiper hero-slider">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <h1>Innovative Medical Solutions</h1>
+                        <p>Cutting-edge technology for better healthcare outcomes</p>
+                        <a href="#products" class="btn">Explore Products</a>
+                    </div>
+                    <div class="slide-model" id="slide1-model"></div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <h1>Precision Diagnostics</h1>
+                        <p>Advanced imaging and analysis tools for accurate diagnosis</p>
+                        <a href="#services" class="btn">Our Services</a>
+                    </div>
+                    <div class="slide-model" id="slide2-model"></div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <h1>Quality Assurance</h1>
+                        <p>Certified medical products meeting international standards</p>
+                        <a href="#about" class="btn">About Us</a>
+                    </div>
+                    <div class="slide-model" id="slide3-model"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About MediTech</h2>
+                <p>Pioneering medical technology since 2005</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>To develop innovative medical solutions that improve patient outcomes while reducing healthcare
+                        costs through cutting-edge technology.</p>
+
+                    <h3>Our Vision</h3>
+                    <p>To be a global leader in medical technology, transforming healthcare delivery through continuous
+                        innovation and excellence.</p>
+
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h4 class="counter" data-target="15">0+</h4>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="counter" data-target="500">0+</h4>
+                            <p>Products Developed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="counter" data-target="200">0+</h4>
+                            <p>Healthcare Partners</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="about-model" id="about-model"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive healthcare solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Diagnostic Equipment</h3>
+                    <p>State-of-the-art diagnostic tools for accurate and fast medical assessments.</p>
+                    <div class="service-model" id="service1-model"></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                    <h3>Surgical Instruments</h3>
+                    <p>Precision surgical tools designed for minimally invasive procedures.</p>
+                    <div class="service-model" id="service2-model"></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Patient Monitoring</h3>
+                    <p>Advanced monitoring systems for continuous patient care.</p>
+                    <div class="service-model" id="service3-model"></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-medical"></i>
+                    </div>
+                    <h3>Telemedicine Solutions</h3>
+                    <p>Integrated platforms for remote healthcare delivery.</p>
+                    <div class="service-model" id="service4-model"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Innovative medical devices and equipment</p>
+            </div>
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="diagnostic">Diagnostic</button>
+                <button class="filter-btn" data-filter="surgical">Surgical</button>
+                <button class="filter-btn" data-filter="monitoring">Monitoring</button>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="diagnostic">
+                    <div class="product-model" id="product1-model"></div>
+                    <div class="product-info">
+                        <h3>Digital X-Ray System</h3>
+                        <p>High-resolution digital imaging with low radiation exposure.</p>
+                        <div class="product-specs">
+                            <span><i class="fas fa-bolt"></i> 120kV</span>
+                            <span><i class="fas fa-expand"></i> 43cm detector</span>
+                        </div>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card" data-category="surgical">
+                    <div class="product-model" id="product2-model"></div>
+                    <div class="product-info">
+                        <h3>Laparoscopic Set</h3>
+                        <p>Complete set for minimally invasive abdominal procedures.</p>
+                        <div class="product-specs">
+                            <span><i class="fas fa-ruler"></i> 5mm/10mm</span>
+                            <span><i class="fas fa-box-open"></i> 12 instruments</span>
+                        </div>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card" data-category="monitoring">
+                    <div class="product-model" id="product3-model"></div>
+                    <div class="product-info">
+                        <h3>Multi-Parameter Monitor</h3>
+                        <p>Continuous monitoring of ECG, SpO2, NIBP, and temperature.</p>
+                        <div class="product-specs">
+                            <span><i class="fas fa-tv"></i> 12.1" display</span>
+                            <span><i class="fas fa-memory"></i> 72hr memory</span>
+                        </div>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card" data-category="diagnostic">
+                    <div class="product-model" id="product4-model"></div>
+                    <div class="product-info">
+                        <h3>Portable Ultrasound</h3>
+                        <p>Compact ultrasound system with 3D imaging capabilities.</p>
+                        <div class="product-specs">
+                            <span><i class="fas fa-weight"></i> 2.5kg</span>
+                            <span><i class="fas fa-battery-full"></i> 4hr battery</span>
+                        </div>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our medical experts</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>123 Medical Drive, Health City, HC 12345</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+1 (800) MED-TECH</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@meditech.example</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>MediTech</h3>
+                    <p>Innovating healthcare technology for a healthier tomorrow.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Diagnostic Equipment</a></li>
+                        <li><a href="#">Surgical Instruments</a></li>
+                        <li><a href="#">Monitoring Systems</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for updates on new products and services.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MediTech Solutions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script>
+        // Font Size Controls
+        const fontDecrease = document.getElementById('font-decrease');
+        const fontReset = document.getElementById('font-reset');
+        const fontIncrease = document.getElementById('font-increase');
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Font size control functions
+        function decreaseFont() {
+            const currentSize = document.body.classList.value.match(/font-\w+/);
+            document.body.classList.remove(...['font-small', 'font-normal', 'font-large', 'font-xlarge']);
+
+            if (!currentSize || currentSize[0] === 'font-normal') {
+                document.body.classList.add('font-small');
+            } else if (currentSize[0] === 'font-large') {
+                document.body.classList.add('font-normal');
+            } else if (currentSize[0] === 'font-xlarge') {
+                document.body.classList.add('font-large');
+            }
+            savePreferences();
+        }
+
+        function resetFont() {
+            document.body.classList.remove(...['font-small', 'font-normal', 'font-large', 'font-xlarge']);
+            savePreferences();
+        }
+
+        function increaseFont() {
+            const currentSize = document.body.classList.value.match(/font-\w+/);
+            document.body.classList.remove(...['font-small', 'font-normal', 'font-large', 'font-xlarge']);
+
+            if (!currentSize || currentSize[0] === 'font-normal') {
+                document.body.classList.add('font-large');
+            } else if (currentSize[0] === 'font-small') {
+                document.body.classList.add('font-normal');
+            } else if (currentSize[0] === 'font-large') {
+                document.body.classList.add('font-xlarge');
+            }
+            savePreferences();
+        }
+
+        // Theme toggle function
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            savePreferences();
+        }
+
+        // Save preferences to localStorage
+        function savePreferences() {
+            const currentSize = document.body.classList.value.match(/font-\w+/);
+            const isDarkMode = document.body.classList.contains('dark-mode');
+
+            localStorage.setItem('fontSize', currentSize ? currentSize[0] : 'font-normal');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // Load preferences from localStorage
+        function loadPreferences() {
+            const fontSize = localStorage.getItem('fontSize');
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+
+            if (fontSize) {
+                document.body.classList.add(fontSize);
+            }
+
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Event listeners
+        fontDecrease.addEventListener('click', decreaseFont);
+        fontReset.addEventListener('click', resetFont);
+        fontIncrease.addEventListener('click', increaseFont);
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Load preferences when page loads
+        window.addEventListener('DOMContentLoaded', loadPreferences);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Preloader
+            window.addEventListener('load', function () {
+                document.querySelector('.preloader').style.display = 'none';
+            });
+
+            // Mobile Navigation
+            const navToggle = document.querySelector('.nav-toggle');
+            const navClose = document.querySelector('.nav-close');
+            const navLinks = document.querySelector('.nav-links');
+
+            navToggle.addEventListener('click', function () {
+                navLinks.classList.add('active');
+            });
+
+            navClose.addEventListener('click', function () {
+                navLinks.classList.remove('active');
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function () {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Sticky Navigation on Scroll
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Initialize Hero Slider
+            const heroSlider = new Swiper('.hero-slider', {
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            // Product Filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    productCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Initialize 3D Models
+            function init3DModels() {
+                // Check if Three.js is loaded
+                if (typeof THREE === 'undefined') {
+                    console.error('Three.js is not loaded');
+                    return;
+                }
+
+                // Function to create a basic 3D model
+                function createBasicModel(containerId, color = 0x2a7fba, shape = 'box') {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+
+                    const width = container.clientWidth;
+                    const height = container.clientHeight;
+
+                    // Scene
+                    const scene = new THREE.Scene();
+                    scene.background = new THREE.Color(0xf5f5f5);
+
+                    // Camera
+                    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+                    camera.position.z = 5;
+
+                    // Renderer
+                    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                    renderer.setSize(width, height);
+                    container.appendChild(renderer.domElement);
+
+                    // Lighting
+                    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                    scene.add(ambientLight);
+
+                    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                    directionalLight.position.set(1, 1, 1);
+                    scene.add(directionalLight);
+
+                    // Object
+                    let geometry;
+                    switch (shape) {
+                        case 'sphere':
+                            geometry = new THREE.SphereGeometry(1, 32, 32);
+                            break;
+                        case 'cylinder':
+                            geometry = new THREE.CylinderGeometry(0.8, 0.8, 1.5, 32);
+                            break;
+                        case 'torus':
+                            geometry = new THREE.TorusGeometry(0.8, 0.3, 16, 100);
+                            break;
+                        default: // box
+                            geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+                    }
+
+                    const material = new THREE.MeshPhongMaterial({
+                        color: color,
+                        shininess: 100,
+                        flatShading: true
+                    });
+
+                    const mesh = new THREE.Mesh(geometry, material);
+                    scene.add(mesh);
+
+                    // Animation
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        mesh.rotation.x += 0.005;
+                        mesh.rotation.y += 0.01;
+                        renderer.render(scene, camera);
+                    }
+
+                    // Handle resize
+                    window.addEventListener('resize', function () {
+                        const newWidth = container.clientWidth;
+                        const newHeight = container.clientHeight;
+
+                        camera.aspect = newWidth / newHeight;
+                        camera.updateProjectionMatrix();
+
+                        renderer.setSize(newWidth, newHeight);
+                    });
+
+                    animate();
+                }
+
+                // Create models for different sections
+                createBasicModel('slide1-model', 0x2a7fba, 'box');
+                createBasicModel('slide2-model', 0x4ac7e9, 'sphere');
+                createBasicModel('slide3-model', 0x2a7fba, 'cylinder');
+                createBasicModel('about-model', 0x4ac7e9, 'torus');
+
+                // Product models with different shapes
+                createBasicModel('product1-model', 0x2a7fba, 'box'); // X-ray
+                createBasicModel('product2-model', 0x4ac7e9, 'cylinder'); // Laparoscopic
+                createBasicModel('product3-model', 0x2a7fba, 'sphere'); // Monitor
+                createBasicModel('product4-model', 0x4ac7e9, 'torus'); // Ultrasound
+            }
+
+            // Initialize 3D models after a short delay to ensure Three.js is loaded
+            setTimeout(init3DModels, 500);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // GSAP Animations
+            if (typeof gsap !== 'undefined') {
+                // Animate elements on scroll
+                gsap.utils.toArray('.about-content, .service-card, .product-card').forEach(element => {
+                    gsap.from(element, {
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: 'power3.out'
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const statItems = document.querySelectorAll('.stat-item');
+
+            function animateOnScroll() {
+                statItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (itemTop < windowHeight * 0.8) {
+                        if (!item.classList.contains('animate')) {
+                            item.classList.add('animate');
+                            animateCounter(item.querySelector('.counter'));
+                        }
+                    }
+                });
+            }
+
+            function animateCounter(element) {
+                const target = parseInt(element.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const start = 0;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const currentValue = Math.floor(progress * target);
+
+                    element.textContent = currentValue;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                }
+
+                requestAnimationFrame(updateCounter);
+            }
+
+            // Initial check
+            animateOnScroll();
+
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+
+</body>
+
+</html>
